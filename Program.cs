@@ -24,6 +24,7 @@ namespace BookStore
             
             var app = builder.Build();
 
+            app.UseStaticFiles();
 
             app.MapControllerRoute(
                 name: "default",
