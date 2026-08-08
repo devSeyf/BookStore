@@ -12,8 +12,8 @@ namespace BookStore
             
             builder.Services.AddControllersWithViews();
 
-            // تسجيل الـ Repositories
-            //builder.Services.AddSingleton<IBookstoreRepository<Book>, BookRepository>();
+        
+             builder.Services.AddSingleton<IBookstoreRepository<Book>, BookRepository>();
             
 
 

@@ -1,49 +1,47 @@
-﻿using BookStore.Models.Repositories;
+﻿using BookStore.Models;
+using BookStore.Models.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using BookStore.Models;
 
 namespace BookStore.Controllers
 {
-    public class AuthorController : Controller
+    public class BookController : Controller
     {
-        private readonly IBookstoreRepository<Author> authorRepository;
+        private readonly IBookstoreRepository<Book> bookRepository;
 
-        public AuthorController(IBookstoreRepository<Author> authorRepository)
+        public BookController(IBookstoreRepository<Book> bookRepository)
         {
-            this.authorRepository = authorRepository;
+            this.bookRepository = bookRepository;
         }
 
 
-
-        // GET: Author
+        // GET: BookController
         public ActionResult Index()
         {
-            var authors = authorRepository.List();
-            return View(authors);
+            var books = bookRepository.List();
+            return View(books);
         }
 
-        // GET: Author/Details/5
+        // GET: BookController/Details/5
         public ActionResult Details(int id)
         {
-            var author = authorRepository.Find(id);
-            return View(author);
+            var book = bookRepository.Find(id);
+            return View(book);
         }
 
-        // GET: Author/Create
+        // GET: BookController/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Author/Create
+        // POST: BookController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Author author)
+        public ActionResult Create(IFormCollection collection)
         {
             try
             {
-                authorRepository.Add(author);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -52,21 +50,19 @@ namespace BookStore.Controllers
             }
         }
 
-        // GET: Author/Edit/5
+        // GET: BookController/Edit/5
         public ActionResult Edit(int id)
         {
-            var author = authorRepository.Find(id);
-            return View(author);
+            return View();
         }
 
-        // POST: Author/Edit/5
+        // POST: BookController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id,  Author author)
+        public ActionResult Edit(int id, IFormCollection collection)
         {
             try
             {
-                authorRepository.Update(id, author);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -75,21 +71,19 @@ namespace BookStore.Controllers
             }
         }
 
-        // GET: Author/Delete/5
+        // GET: BookController/Delete/5
         public ActionResult Delete(int id)
         {
-            var author = authorRepository.Find(id);
-            return View(author);
+            return View();
         }
 
-        // POST: Author/Delete/5
+        // POST: BookController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, Author author)
+        public ActionResult Delete(int id, IFormCollection collection)
         {
             try
             {
-                authorRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
