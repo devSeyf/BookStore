@@ -70,8 +70,21 @@ namespace BookStore.Controllers
         // GET: BookController/Edit/5
         public ActionResult Edit(int id)
         {
+
+
             var book = bookRepository.Find(id);
-            return View(book);
+            var authorId = book.Author == null ? 0 : book.Author.Id;
+
+            var viewModel = new BookAuthorViewModel
+            {
+                BookId = book.Id,
+                Title = book.Title,
+                Description = book.Description,
+                AuthorId = authorId,
+                Authors = authorRepoistory.List().ToList()
+            };
+
+            return View(viewModel);
         }
 
         // POST: BookController/Edit/5
